@@ -46,14 +46,14 @@ class TwigLoader
 	/**
 	*	@param String: The template's name
 	*	@param Array: Made of the options you want to be in your TemplatingArray
-	*	@param String: The name of a class::method() you want to be executed right away after instanciating the class
+	*	@param String: The name of a class::method() you want to be executed right after instanciating the class
 	*/
-	public function __construct(String $tpl = '', Array $renders = NULL, String $action = '')
+	public function __construct(String $tpl = NULL, Array $renders = NULL, String $action = NULL)
 	{
 		self::loadTwig();
-		if($tpl != '') self::loadTemplate($tpl);
+		if($tpl != NULL) self::loadTemplate($tpl);
 		if($renders != NULL) self::loadRenders($renders);
-		if($action != '') self::$action();
+		if($action != NULL) self::$action();
 	}
 
 	/**
@@ -99,7 +99,6 @@ class TwigLoader
 		    #'cache' => '/path/to/compilation_cache',
 		));
 		$this -> twig -> addExtension(new Twig_Extension_Debug());
-		#$this -> twig -> addExtension(new Project_Twig_Extension());
 
 		return $this;
 	}
@@ -108,10 +107,10 @@ class TwigLoader
 	*	@param String: The template's name to load
 	*	@return $this
 	*/
-	public function loadTemplate(String $tpl = '')
+	public function loadTemplate(String $tpl = NULL)
 	{
 		$template = strtolower($tpl);
-		if(isset($this -> tpl) && $this -> tpl != '' && $tpl == '')
+		if(isset($this -> tpl) && $this -> tpl != '' && $tpl == NULL)
 		{
 			if(self::checkIfTemplateExist($tpl))
 			{
@@ -120,7 +119,7 @@ class TwigLoader
 			}
 			else throw new Exception("Template does not exist - view Exception in Twig.class.php, method loadTemplate");
 		}
-		elseif($tpl != '')
+		elseif($tpl != NULL)
 		{
 			if(self::checkIfTemplateExist($tpl))
 			{
@@ -170,6 +169,7 @@ class TwigLoader
 
 	/**
 	*	@param String: Template's name - without the prefix & extension
+	*	@return Boolean
 	*/
 	private function checkIfTemplateExist($tpl)
 	{
