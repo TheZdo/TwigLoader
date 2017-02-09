@@ -2,8 +2,10 @@
 Twig loading class
 ### How to use it
 To load a template withing the construtor
+```php
     <?php
     $twig = new TwigLoader('home', array('nameParam' => 'contentParam', 'nameParam2' => 'contentParam2'), 'loadFinal');
+```
 
 To load a template and assign stuff to it using the methods
 ```php
