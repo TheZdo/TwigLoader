@@ -20,6 +20,7 @@ Another way to do it without passing anything in the contructor's parameters
 
 Or without using chaining
 ```
+    <?php
     $twig = new TwigLoader;
     $twig -> _setTemplateName('home');
     $twig -> _setTitle('HOME');
